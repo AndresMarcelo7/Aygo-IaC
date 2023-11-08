@@ -42,6 +42,7 @@ public class CdkProjectStack extends Stack {
                 .build();
         securityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(22), "ssh from anywhere!");
         securityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(80), "http from anywhere!");
+        securityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(8080), "http from anywhere!");
         return securityGroup;
     }
 
@@ -69,10 +70,10 @@ public class CdkProjectStack extends Stack {
                 .build();
         String userData = "#!/bin/bash\n" +
                 "yum update -y\n" +
-                "yum install -y httpd\n" +
-                "systemctl start httpd\n" +
-                "systemctl enable httpd\n" +
-                "echo \"<html><body><h1>Hello from EC2</h1></body></html>\" > /var/www/html/index.html";
+                "sudo yum install docker -y\n" +
+                "sudo service docker start\n" +
+                "sudo usermod -a -G docker ec2-user\n" +
+                "sudo docker run -d -p 80:6000 --name mysparkcontainer andresmarcelo7/sparkwebapprepo:latest\n";
         engineEC2Instance.addUserData(userData);
 
         return engineEC2Instance;
