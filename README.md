@@ -14,11 +14,12 @@ Aqui se encuentra el codigo para desplegar infraestructura (3 maquinas de EC2 co
 
 ## Ejecucion
 
-1. Clonar el repositorio
+0. Clonar el repositorio
+1. En el archivo [CdkProjectApp.java](src%2Fmain%2Fjava%2Fcom%2Fmyorg%2FCdkProjectApp.java) Cambiar los valores de la VPC y el Rol de EC2 por los valores de la cuenta de AWS en la que se va a desplegar la infrastructura.
 2. Ejecutar el script [deploy.sh](deploy.sh) con el comando `./deploy.sh`
 3. Esperar a que termine el despliegue (puede tardar unos minutos en crear las maquinas)
 4. Ir a la consola de AWS y en el servicio de EC2 buscar las direcciones IP publicas de las maquinas creadas
-5. Ingresar a las direcciones IP publicas de las maquinas en el navegador (protocolo HTTP) y verificar que se despliega la aplicacion (http://[IP_PUBLICA]/hello)
+5. Ingresar a las direcciones IP publicas de las maquinas en el navegador (protocolo HTTP) y verificar que se despliega la aplicacion (`http://[IP_PUBLICA]/hello`)
 6. Para destruir la infraestructura, ejecutar el script [destroy.sh](destroy.sh) con el comando `./destroy.sh`
 
 ## Evidencia
